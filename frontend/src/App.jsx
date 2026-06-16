@@ -14,24 +14,37 @@ import EventDetail   from './pages/EventDetail.jsx'
 import Contact       from './pages/Contact.jsx'
 import AdminDashboard from './pages/AdminDashboard.jsx'
 import ChatBot       from './components/ChatBot.jsx'
+import nobglogo from './images/nobglogo.png'
 
 const API = 'http://127.0.0.1:8000/api'
 
 /* ── Logo ───────────────────────────────────────────────────────── */
-function Logo() {
+function Logo({ compact = false }) {
+  const logoImg = (
+    <img src={nobglogo} alt="AswenSolutions logo" className="w-full h-full object-contain" style={{ filter: 'drop-shadow(0 12px 30px rgba(0,0,0,0.5))' }} />
+  )
+
+  if (compact) {
+    return (
+      <Link to="/" className="flex items-center group" style={{ textDecoration: 'none' }}>
+        <div className="relative rounded flex-shrink-0" style={{ width: 'clamp(56px,9vw,120px)', height: 'clamp(40px,7vw,80px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {logoImg}
+        </div>
+      </Link>
+    )
+  }
+
   return (
     <Link to="/" className="flex items-center gap-2 group" style={{ textDecoration: 'none' }}>
-      <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-           style={{ background: 'linear-gradient(135deg,#059669,#047857)', border: '1px solid rgba(52,211,153,0.4)', boxShadow: '0 4px 16px -4px rgba(16,185,129,0.5)' }}>
-        <Zap className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-white" />
-        <div className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-cyan-400"
-             style={{ background: '#22d3ee', boxShadow: '0 0 6px #22d3ee' }} />
+      <div className="relative rounded flex items-center justify-center flex-shrink-0"
+           style={{ width: 'clamp(72px,10vw,140px)', height: 'clamp(72px,10vw,140px)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {logoImg}
       </div>
       <div className="flex flex-col leading-none">
-        <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 800, fontSize: 'clamp(0.9rem,2vw,1.1rem)', letterSpacing: '-0.02em', color: '#ecfdf5' }}>
+        <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 800, fontSize: 'clamp(1.1rem,2.6vw,1.6rem)', letterSpacing: '-0.02em', color: '#ecfdf5' }}>
           Aswen<span style={{ color: '#34d399' }}>Solutions</span>
         </span>
-        <span style={{ fontSize: 'clamp(0.55rem,1.5vw,0.6rem)', fontWeight: 600, letterSpacing: '0.12em', color: '#10b981', textTransform: 'uppercase' }}>
+        <span style={{ fontSize: 'clamp(0.65rem,1.8vw,0.9rem)', fontWeight: 600, letterSpacing: '0.12em', color: '#10b981', textTransform: 'uppercase' }}>
           Enterprise AI
         </span>
       </div>
@@ -78,7 +91,7 @@ function Navbar() {
     <nav className={`nav-root${scrolled ? ' nav-root-scrolled' : ''}`}>
       <div className="page-wrap">
         <div className="nav-shell">
-          <Logo />
+          <Logo compact />
 
           {/* Desktop links */}
           <div className="nav-links-wrap">
